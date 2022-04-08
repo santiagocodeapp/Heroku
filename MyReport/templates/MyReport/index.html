@@ -1,0 +1,68 @@
+{% extends "MyReport/layout.html" %}
+
+<!-- Block that will display updated list of teams for the Coach/add-team Modal -->
+{% block NewTeams %} 
+
+  <div class="w3-section">
+    <label for="exampleDataList1" class="form-label"><strong>New</strong>Team:</label>
+    <input class="w3-input" list="datalistOptions1" id="exampleDataList1" placeholder="" name="new-team">
+    <datalist id="datalistOptions1">
+        {% for team in teams %} 
+        <option value="{{ team }}"></option>
+        {% endfor %} 
+    </datalist>
+</div>
+
+{% endblock %} 
+
+
+<!-- Block that will display updated list of teams for the Coach/add-player Modal -->
+{% block teams %}
+<div class="w3-section">
+    <label for="exampleDataList" class="form-label"><strong>Team:</strong></label>
+    <input class="w3-input" list="datalistOptions" id="exampleDataList" placeholder="" name="exampleDataList">
+    <datalist id="datalistOptions">
+      {% for team in teams %} 
+      <option value="{{ team }}"></option>
+      {% endfor %} 
+    </datalist>
+  </div>
+{% endblock %}
+
+
+{% block body %}
+
+<!-- Script that display message after adding new player to a team -->
+{% if message %}
+<script>
+    alert("You have successfully added a new player to the team.")
+</script>
+{% endif %} 
+
+<!-- Script that display message after creating new team -->
+{% if message1 %}
+<script>
+    alert("You have successfully added a new team.")
+</script>
+{% endif %} 
+
+<!-- Team Container -->
+<div class="w3-container w3-padding-64 w3-center" id="team">
+    <h2>IMG BASEBALL TEAMS</h2> 
+    <div class="w3-row"><br>
+        
+        {% for team in teams %} 
+            <div class="w3-quarter">
+                <img src="https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+                <h3><a href="{% url 'team' team %}" style="text-decoration: none;">{{ team }}</a></h3>
+            </div>
+        {% endfor %} 
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+

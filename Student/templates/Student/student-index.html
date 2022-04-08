@@ -1,0 +1,37 @@
+{% extends "Student/student-layout.html" %}
+
+
+{% block body %}
+
+<!-- Report Container Creator -->
+<div class="w3-row-padding w3-center w3-padding-64" id="pricing">
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+    <p>Click on "View Report" to review your reports.</p><br>
+
+    {% for report in reports %}
+    <div class="w3-third w3-margin-bottom">
+        <ul class="w3-ul w3-border w3-hover-shadow">
+          <li class="w3-theme">
+            <p id="player-name" class="w3-xlarge"><strong>IMG</strong>Report</p>
+            <p id="defense" style="display: none;">{{ report.Defense }}</p>
+            <p id="hitting" style="display: none;">{{ report.Hitting }}</p>
+            <p id="pitching" style="display: none;"> {{ report.Pitching }} </p>
+            <p id="character-work-ethic" style="display: none;"> {{ report.Character_Work_Ethic }} </p>
+
+          </li>
+          <li id="coach" class="w3-padding-16"><b>COACH:</b> {{ report.CoachName }}</li>
+          <li class="w3-padding-16"><b>PLAYER:</b> {{ report.Player.first }} {{ report.Player.last }}</li>
+          <li class="w3-theme-l5 w3-padding-24">
+            <button id="view-report" onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-teal w3-padding-large"><i class="fa-solid fa-file-invoice"></i> View Report</button>
+          </li>
+        </ul>
+      </div>
+    {% empty %}
+      <script>
+        alert("There are no reports available for you at this time. Contact your Coach to write a new report.");
+        window.location.replace("{% url 'student:logout' %}");
+      </script>
+    {% endfor %} 
+</div>
+
+{% endblock %}
